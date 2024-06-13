@@ -25,7 +25,7 @@ async function fetchASNSets(asn: number): Promise<string[] | null> {
         });
       });
 
-      console.log(`AS-SET for AS${asn}:`, asSets);
+      console.log(`AS-SET for AS${asn}:`, asSets[0]);
       return asSets;
     } else {
       return null;

@@ -22,19 +22,11 @@ function generatePrefixLists(asn: string, asSets: string[]): PrefixLists {
     const linesIPv6 = resultIPv6.trim().split("\n");
 
     for (let i = 0; i < linesIPv4.length; i++) {
-      if (
-        !linesIPv4[i].startsWith("no ip prefix-list") &&
-        !results.v4.includes(linesIPv4[i])
-      )
-        results.v4.push(linesIPv4[i]);
+      if (!results.v4.includes(linesIPv4[i])) results.v4.push(linesIPv4[i]);
     }
 
     for (let i = 0; i < linesIPv6.length; i++) {
-      if (
-        !linesIPv4[i].startsWith("no ip prefix-list") &&
-        !results.v6.includes(linesIPv6[i])
-      )
-        results.v6.push(linesIPv6[i]);
+      if (!results.v6.includes(linesIPv6[i])) results.v6.push(linesIPv6[i]);
     }
   });
 

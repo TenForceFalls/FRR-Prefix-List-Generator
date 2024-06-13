@@ -10,25 +10,23 @@ function generatePrefixLists(asn: string, asSets: string[]): PrefixLists {
 
   if (asSets && asSets.length > 0)
     asSets.forEach((asSet: string) => {
-      const namingFormatV4 = `AS${asn}-In-v4`;
-      const namingFormatV6 = `AS${asn}-In-v6`;
+      let namingFormatV4 = `AS${asn}-In-v4`;
+      let namingFormatV6 = `AS${asn}-In-v6`;
 
-      const bgpq4IPv4Command = `bgpq4 ${asSet} -l ${namingFormatV4}`;
-      const bgpq4IPv6Command = `bgpq4 -6 ${asSet} -l ${namingFormatV6}`;
+      let bgpq4IPv4Command = `bgpq4 ${asSet} -l ${namingFormatV4}`;
+      let bgpq4IPv6Command = `bgpq4 -6 ${asSet} -l ${namingFormatV6}`;
 
-      const resultIPv4 = execSync(bgpq4IPv4Command, { encoding: "utf-8" });
-      const resultIPv6 = execSync(bgpq4IPv6Command, { encoding: "utf-8" });
+      let resultIPv4 = execSync(bgpq4IPv4Command, { encoding: "utf-8" });
+      let resultIPv6 = execSync(bgpq4IPv6Command, { encoding: "utf-8" });
 
-      const linesIPv4 = resultIPv4.trim().split("\n");
-      const linesIPv6 = resultIPv6.trim().split("\n");
+      let linesIPv4 = resultIPv4.trim().split("\n");
+      let linesIPv6 = resultIPv6.trim().split("\n");
 
-      for (let i = 0; i < linesIPv4.length; i++) {
+      for (let i = 0; i < linesIPv4.length; i++)
         if (!results.v4.includes(linesIPv4[i])) results.v4.push(linesIPv4[i]);
-      }
 
-      for (let i = 0; i < linesIPv6.length; i++) {
+      for (let i = 0; i < linesIPv6.length; i++)
         if (!results.v6.includes(linesIPv6[i])) results.v6.push(linesIPv6[i]);
-      }
     });
 
   return results;

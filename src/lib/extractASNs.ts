@@ -12,7 +12,7 @@ function extractASNs(): number[] {
       const columns = lines[i].trim().split(/\s+/);
       const AS = parseInt(columns[2]);
 
-      if (!ingoreList.includes(AS)) {
+      if (!ingoreList.includes(AS) && !asNumbers.includes(AS)) {
         if (!isNaN(AS)) asNumbers.push(AS);
       }
     }

@@ -1,6 +1,6 @@
 # FRR Prefix List Generator
 
-Made with love by [https://tritan.gg](AS393577) <3
+Made with love by [AS393577](https://tritan.gg) <3
 
 ## Overview
 

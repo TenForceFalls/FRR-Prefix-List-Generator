@@ -4,7 +4,7 @@ Made with love by [AS393577](https://tritan.gg) <3
 
 ## Overview
 
-This project will generate BGP prefix lists, it pulls ASN from the output on the FRR bgp summary command then fetches their AS-SETs.
+This project will generate BGP prefix lists, it pulls ASN from the output on the FRR bgp summary command then fetches their AS-SETs. Following this, it builds filters based on as-sets and adds them to the running config.
 
 It essentially does the following:
 

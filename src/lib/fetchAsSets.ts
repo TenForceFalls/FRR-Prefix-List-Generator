@@ -8,23 +8,31 @@ interface ASResponse {
   data: ASData[];
 }
 
-async function fetchASNSets(asn: string): Promise<string[]> {
+async function fetchASNSets(asns: number[]): Promise<string[]> {
   try {
-    const response = await axios.get<ASResponse>(
-      `https://www.peeringdb.com/api/as_set/${asn}`
-    );
+    const promises = asns.map(async (asn) => {
+      const response = await axios.get<ASResponse>(
+        `https://www.peeringdb.com/api/as_set/${asn}`
+      );
 
-    const asSets: string[] = [];
+      const asSets: string[] = [];
 
-    response.data.data.forEach((item: ASData) => {
-      Object.values(item).forEach((asSet: string) => {
-        asSets.push(asSet);
+      response.data.data.forEach((item: ASData) => {
+        Object.values(item).forEach((value: string) => {
+          if (value || value !== "") asSets.push(value);
+        });
       });
+
+      return asSets;
     });
 
-    return asSets;
+    const allASNSets = await Promise.all(promises);
+
+    console.log("AS-Sets:", allASNSets);
+
+    return allASNSets.flat();
   } catch (error) {
-    console.error(`Error fetching AS-SETs for ASN ${asn}:`, error);
+    console.error("Error fetching AS-SETs:", error);
     return [];
   }
 }

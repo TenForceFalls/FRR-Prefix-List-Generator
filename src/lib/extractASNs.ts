@@ -13,11 +13,7 @@ function extractASNs(): number[] {
       const AS = parseInt(columns[2]);
 
       if (!ingoreList.includes(AS) && !asNumbers.includes(AS) && !isNaN(AS))
-        if (AS >= 1 && AS <= 65535) {
-          asNumbers.push(AS);
-        } else {
-          console.warn(`Invalid ASN found: ${AS}`);
-        }
+        asNumbers.push(AS);
     }
 
     console.log("AS Numbers:", asNumbers);

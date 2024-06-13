@@ -31,7 +31,7 @@ async function fetchASNSets(asn: number): Promise<string[]> {
       return [];
     }
   } catch (error) {
-    console.error(`Error fetching AS-SETs for ASN ${asn}:`, error);
+    console.error(`Error fetching AS-SETs for ASN ${asn}`);
     return [];
   }
 }

@@ -10,6 +10,7 @@ async function main() {
 
   for (const asn of asns) {
     const asSets = await fetchAsSets(asn);
+
     const prefixLists = generatePrefixLists(`${asn}`, asSets);
 
     const combinedPrefixLists = [...prefixLists.v4, ...prefixLists.v6];

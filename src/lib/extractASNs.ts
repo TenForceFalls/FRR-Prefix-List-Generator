@@ -20,6 +20,8 @@ function extractASNs(): number[] {
         asNumbers.push(AS);
       }
     }
+
+    console.log("AS Numbers:", asNumbers);
   } catch (error) {
     console.error("Error executing BGP command:", error);
   }

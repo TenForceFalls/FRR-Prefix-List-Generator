@@ -3,11 +3,13 @@ import extractASNs from "./lib/extractASNs";
 import generatePrefixLists from "./lib/generatePrefixLists";
 import { execSync } from "child_process";
 
+let done = false;
+
 async function main() {
   let asns = extractASNs();
-  let asSets = await fetchAsSets(asns);
 
   for (const asn of asns) {
+    const asSets = await fetchAsSets(asn);
     const prefixLists = generatePrefixLists(`${asn}`, asSets);
 
     const combinedPrefixLists = [...prefixLists.v4, ...prefixLists.v6];
@@ -17,9 +19,12 @@ async function main() {
       console.log(`Adding ${ctx}`);
     });
   }
+
+  done = true;
 }
 
 main().catch((error) => {
   console.error("An error occurred:", error);
-  process.exit(1);
+
+  if (done) process.exit(1);
 });

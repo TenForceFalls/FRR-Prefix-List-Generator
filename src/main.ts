@@ -7,16 +7,19 @@ async function main() {
   let asns = extractASNs();
 
   for (const asn of asns) {
-    const asSets = await fetchAsSets(asn);
-    const prefixLists = generatePrefixLists(`${asn}`, asSets);
+    let asSets = await fetchAsSets(asn);
+    let prefixLists = generatePrefixLists(`${asn}`, asSets);
 
-    const combinedPrefixLists = [...prefixLists.v4, ...prefixLists.v6];
+    let combinedPrefixLists = [...prefixLists.v4, ...prefixLists.v6];
 
     if (combinedPrefixLists.length > 0)
-      combinedPrefixLists.forEach((ctx) => {
-        if (ctx.startsWith("no")) return;
-        execSync(`vtysh -c "conf t" -c "${ctx}" -c "end" -c "exit"`);
-        console.log(`Adding ${ctx}`);
+      combinedPrefixLists.forEach((i) => {
+        // yell at people with inaccurate peeringdb data to fix it and then remove this, itll keep the script from overwriting the prefix list with an empty one
+        if (i.startsWith("no")) return;
+
+        execSync(`vtysh -c "conf t" -c "${i}" -c "end" -c "exit"`);
+
+        console.log(`Adding ${i}`);
       });
   }
 }

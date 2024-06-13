@@ -17,9 +17,7 @@ async function fetchASNSets(asn: number): Promise<string[]> {
 
         response.data.data.forEach((item: ASData) => {
           Object.values(item).forEach((asSet) => {
-            if (asSet !== "" && !asSets.includes(asSet)) {
-              asSets.push(asSet);
-            }
+            if (asSet !== "" && !asSets.includes(asSet)) asSets.push(asSet);
           });
         });
 
@@ -30,7 +28,7 @@ async function fetchASNSets(asn: number): Promise<string[]> {
         return [];
       }
     })
-    .catch((error: AxiosError) => {
+    .catch(() => {
       console.log(`Error fetching AS-SETs for ASN ${asn}:`);
       return [];
     });

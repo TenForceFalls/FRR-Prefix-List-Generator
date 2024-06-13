@@ -10,13 +10,21 @@ function extractASNs(): number[] {
 
     for (let i = 6; i < lines.length; i++) {
       const columns = lines[i].trim().split(/\s+/);
-      const AS = parseInt(columns[2]);
-
-      if (!ingoreList.includes(AS) && !asNumbers.includes(AS) && !isNaN(AS))
-        asNumbers.push(AS);
+      if (columns.length >= 3) {
+        const AS = parseInt(columns[2]);
+        if (
+          !isNaN(AS) &&
+          AS >= 1 &&
+          AS <= 65535 &&
+          !ingoreList.includes(AS) &&
+          !asNumbers.includes(AS)
+        ) {
+          asNumbers.push(AS);
+        }
+      }
     }
 
-    console.log("AS Numbers:", asNumbers);
+    console.log(`${asNumbers.length} AS Numbers:`, asNumbers);
   } catch (error) {
     console.error("Error executing BGP command:", error);
   }

@@ -3,8 +3,7 @@ import extractASNs from "./lib/extractASNs";
 import generatePrefixLists from "./lib/generatePrefixLists";
 import { execSync } from "child_process";
 
-let done = false;
-
+let count = 1;
 async function main() {
   let asns = extractASNs();
 
@@ -19,7 +18,11 @@ async function main() {
         execSync(`vtysh -c "conf t" -c "${ctx}" -c "end" -c "exit"`);
         console.log(`Adding ${ctx}`);
       });
+
+    count++;
   }
+
+  console.log(`Got to ${count}`);
 }
 
 (async () => {

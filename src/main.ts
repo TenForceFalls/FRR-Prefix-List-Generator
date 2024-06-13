@@ -14,17 +14,14 @@ async function main() {
 
     const combinedPrefixLists = [...prefixLists.v4, ...prefixLists.v6];
 
-    combinedPrefixLists.forEach((ctx) => {
-      execSync(`vtysh -c "conf t" -c "${ctx}" -c "end" -c "exit"`);
-      console.log(`Adding ${ctx}`);
-    });
+    if (combinedPrefixLists.length > 0)
+      combinedPrefixLists.forEach((ctx) => {
+        execSync(`vtysh -c "conf t" -c "${ctx}" -c "end" -c "exit"`);
+        console.log(`Adding ${ctx}`);
+      });
   }
-
-  done = true;
 }
 
 main().catch((error) => {
   console.error("An error occurred:", error);
-
-  if (done) process.exit(1);
 });

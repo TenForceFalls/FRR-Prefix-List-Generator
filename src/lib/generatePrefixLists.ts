@@ -8,7 +8,7 @@ interface PrefixLists {
 function generatePrefixLists(asn: string, asSets: string[]): PrefixLists {
   const results: PrefixLists = { v4: [], v6: [] };
 
-  asSets.forEach((asSet) => {
+  asSets.forEach((asSet: string) => {
     const namingFormatV4 = `AS${asn}-In-v4`;
     const namingFormatV6 = `AS${asn}-In-v6`;
 

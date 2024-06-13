@@ -17,7 +17,7 @@ async function fetchASNSets(asn: string): Promise<string[]> {
     const asSets: string[] = [];
 
     response.data.data.forEach((item: ASData) => {
-      Object.values(item).forEach((asSet) => {
+      Object.values(item).forEach((asSet: string) => {
         asSets.push(asSet);
       });
     });

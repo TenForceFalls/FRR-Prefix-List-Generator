@@ -1,4 +1,5 @@
 import { execSync } from "child_process";
+import { ingoreList } from "../../config";
 
 function extractASNs(): number[] {
   const asNumbers: number[] = [];
@@ -10,6 +11,10 @@ function extractASNs(): number[] {
     for (let i = 6; i < lines.length; i++) {
       const columns = lines[i].trim().split(/\s+/);
       const AS = parseInt(columns[2]);
+
+      if (ingoreList.includes(AS)) {
+        return [];
+      }
 
       if (!isNaN(AS)) {
         asNumbers.push(AS);

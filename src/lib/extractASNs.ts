@@ -11,16 +11,23 @@ function extractASNs(): number[] {
   const asNumbers: Set<number> = new Set();
 
   try {
-    const commandOutput = execSync("sudo vtysh -c 'sh bgp su'", { encoding: "utf-8" });
+    const commandOutput = execSync("sudo vtysh -c 'sh bgp su'", {
+      encoding: "utf-8",
+    });
     const lines = commandOutput.trim().split("\n");
 
     for (let i = 6; i < lines.length; i++) {
       const columns = lines[i].trim().split(/\s+/);
 
       if (columns.length >= 3) {
-        const AS = parseInt(match[1], 10);
+        const AS = parseInt(columns[2]);
 
-        if (!isNaN(AS) && isValidASN(AS) && !ignoreList.includes(AS) && !asNumbers.has(AS)) {
+        if (
+          !isNaN(AS) &&
+          isValidASN(AS) &&
+          !ignoreList.includes(AS) &&
+          !asNumbers.has(AS)
+        ) {
           asNumbers.add(AS);
         }
       }

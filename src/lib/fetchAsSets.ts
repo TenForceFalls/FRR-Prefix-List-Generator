@@ -25,12 +25,12 @@ async function fetchASNSets(asn: number): Promise<string[]> {
         return asSets;
       } else {
         console.log(`Error fetching AS-SETs for ASN ${asn}:`);
-        return [];
+        return [`AS${asn}`];
       }
     })
     .catch(() => {
       console.log(`Error fetching AS-SETs for ASN ${asn}:`);
-      return [];
+      return [`AS${asn}];
     });
 }
 

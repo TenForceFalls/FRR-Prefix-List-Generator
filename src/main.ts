@@ -16,7 +16,7 @@ async function main() {
 
     if (combinedPrefixLists.length > 0)
       combinedPrefixLists.forEach((i) => {
-        // if (i.startsWith("no")) return;
+        if (i.startsWith("no")) return;
         execSync(`vtysh -c "conf t" -c "${i}" -c "end" -c "exit"`);
         console.log(`Adding ${i}`);
       });

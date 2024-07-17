@@ -13,8 +13,8 @@ function generatePrefixLists(asn: string, asSets: string[]): PrefixLists {
       let namingFormatV4 = `AS${asn}-In-v4`;
       let namingFormatV6 = `AS${asn}-In-v6`;
 
-      let bgpq4IPv4Command = `bgpq4 ${asSet} -l ${namingFormatV4} -S RPKI,AFRINIC,ARIN,APNIC,LACNIC,RIPE`;
-      let bgpq4IPv6Command = `bgpq4 -6 ${asSet} -l ${namingFormatV6} -S RPKI,AFRINIC,ARIN,APNIC,LACNIC,RIPE`;
+      let bgpq4IPv4Command = `bgpq4 ${asSet} -l ${namingFormatV4} -S AFRINIC,ARIN,APNIC,LACNIC,RIPE`;
+      let bgpq4IPv6Command = `bgpq4 -6 ${asSet} -l ${namingFormatV6} -S AFRINIC,ARIN,APNIC,LACNIC,RIPE`;
 
       let resultIPv4 = execSync(bgpq4IPv4Command, { encoding: "utf-8" });
       let resultIPv6 = execSync(bgpq4IPv6Command, { encoding: "utf-8" });

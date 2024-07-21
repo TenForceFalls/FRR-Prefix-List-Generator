@@ -11,6 +11,7 @@ It essentially does the following:
 - Gets all bgp neighbors dynamically
 - Polls peeringdb api for as-set listed
   - If an ASN is on an ignore list (like IXP asns, transit, etc-- things that don't need specific filters) it will ignore it.
+  - If there is no as-set listed, it defaults to the ASN while building filters.
 - Generates prefix lists from the as-set via bgpq4, and pipes them into FRR's running config.
   - The naming format for prefix lists are as follow: `AS00000-In-v4` or `AS00000-In-v6`. Your route maps for the neighbors will need to reflect this.
 
@@ -19,7 +20,7 @@ You can run this on a cronjob, daily, weekly, whatever. It saves it into the run
 ## Deps
 
 You'll need to install the following on the linux box:
-bgpq4, bun runtime (or compile to js and use node)
+bgpq4, bun runtime (or compile to js and use node; or use bun to compile to a binary)
 
 ## Running in Dev
 
@@ -32,7 +33,7 @@ bgpq4, bun runtime (or compile to js and use node)
 - Create a cronjob as root: `crontab -u root -E`
 - Start using bun in the crontab, this example is every day at 00:00: `0 0 * * * /root/.nvm/versions/node/v20.14.0/bin/bun run /root/folder/src/main.ts`
 
-Or alternatively, compile the ts to js and use node as the runtime.
+Or alternatively, compile the ts to js and use node as the runtime. You can also just use bun to compile to a binary. 
 
 ## Contributing
 

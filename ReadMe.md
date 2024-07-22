@@ -28,10 +28,10 @@ bgpq4, bun runtime (or compile to js and use node)
 - Run `bun dev` to start the script.
 
 ## Compiling to a binary 
-You can also just use bun to compile to a binary. We've included a binary in the repo named `Generate`, this is built for our use case, and you'll need to recompile the binary using bun when you make changes.
+You can also just use bun to compile to a binary, we've included a binary in the repo named `Generate`. This is built for our use case, and you'll need to recompile the binary using bun when you make changes.
 
 - `bun build ./src/main.ts --compile --outfile {binary name}`
-- Setup a cronjob to run the binary, or setup a system service. Run the binary however you want lol. 
+- Setup a cronjob to run the binary, or setup a system service, etc. Run the binary however you want lol. 
 
 ## Bun runtime on cronjob
 

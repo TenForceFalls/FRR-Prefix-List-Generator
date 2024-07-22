@@ -17,27 +17,37 @@ It essentially does the following:
 
 You can run this on a cronjob, daily, weekly, whatever. It saves it into the running config so you can default back to your orignal frr config by reloading it at any time.
 
-## Deps
+## Dependencies
 
-You'll need to install the following on the linux box:
-bgpq4, bun runtime (or compile to js and use node)
+You'll need to install the following deps on the linux box:
+- `bgpq4`
+- `bun runtime`
+    - (or compile to js conventionally and use node)
+ 
+Install the deps within the codebase:
+- `bun install`
 
-## Running in dev
+## Starting The Script 
+
+There are different ways you can run this, and I'll give a base level introduction to a few of them.
+
+### Dev:
 
 - With Bun installed, run `bun install` to get packages.
 - Run `bun dev` to start the script.
 
-## Compiling to a binary 
+### Compiling to Binary:
 You can also just use bun to compile to a binary, we've included a binary in the repo named `Generate`. This is built for our use case, and you'll need to recompile the binary using bun when you make changes.
 
 - `bun build ./src/main.ts --compile --outfile {binary name}`
 - Setup a cronjob to run the binary, or setup a system service, etc. Run the binary however you want lol. 
 
-## Bun runtime on cronjob
+### Bun Runtime on Cronjob:
 
 - Run `which bun` to get the executable of bun.
 - Create a cronjob as root: `crontab -u root -E`
-- Start using bun in the crontab, this example is every day at 00:00: `0 0 * * * /root/.nvm/versions/node/v20.14.0/bin/bun run /root/folder/src/main.ts`
+- Start using bun in the crontab, this example is every day at 00:00:
+  - `0 0 * * * /root/.nvm/versions/node/v20.14.0/bin/bun run /root/folder/src/main.ts`
 
 Alternatively, compile the ts to js and use node as the runtime. 
 

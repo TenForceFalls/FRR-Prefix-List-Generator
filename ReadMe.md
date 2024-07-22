@@ -20,7 +20,7 @@ You can run this on a cronjob, daily, weekly, whatever. It saves it into the run
 ## Deps
 
 You'll need to install the following on the linux box:
-bgpq4, bun runtime (or compile to js and use node
+bgpq4, bun runtime (or compile to js and use node)
 
 ## Running in dev
 

@@ -20,20 +20,20 @@ You can run this on a cronjob, daily, weekly, whatever. It saves it into the run
 ## Deps
 
 You'll need to install the following on the linux box:
-bgpq4, bun runtime (or compile to js and use node; or use bun to compile to a binary)
+bgpq4, bun runtime (or compile to js and use node
 
-## Running in Dev
+## Running in dev
 
 - With Bun installed, run `bun install` to get packages.
 - Run `bun dev` to start the script.
 
-## Compiling a Binary 
+## Compiling to a binary 
 You can also just use bun to compile to a binary. We've included a binary in the repo named `Generate`, this is built for our use case, and you'll need to recompile the binary using bun when you make changes.
 
 - `bun build ./src/main.ts --compile --outfile {binary name}`
-- Setup a cronjob to run the binary, or setup a system service. Do it however you want lol. 
+- Setup a cronjob to run the binary, or setup a system service. Run the binary however you want lol. 
 
-## Running with bun itself on cronjob
+## Bun runtime on cronjob
 
 - Run `which bun` to get the executable of bun.
 - Create a cronjob as root: `crontab -u root -E`

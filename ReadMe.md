@@ -10,9 +10,9 @@ It essentially does the following:
 
 - Gets all bgp neighbors dynamically
 - Polls peeringdb api for as-set listed
-  - If an ASN is on an ignore list (like IXP asns, transit, etc-- things that don't need specific filters) it will ignore it.
-  - If there is no as-set listed, it defaults to the ASN while building filters.
-- Generates prefix lists from the as-set via bgpq4, and pipes them into FRR's running config.
+  - If an ASN is on an ignore list (like IXP asns, transit, etc-- things that don't need specific or automated filters) it will ignore it.
+  - If there is no as-set listed in peeringdb, it defaults to the ASN while generating filters.
+- Generates prefix lists from the as-set/asn via bgpq4, and pipes them into FRR's running config.
   - The naming format for prefix lists are as follow: `AS00000-In-v4` or `AS00000-In-v6`. Your route maps for the neighbors will need to reflect this.
 
 You can run this on a cronjob, daily, weekly, whatever. It saves it into the running config so you can default back to your orignal frr config by reloading it at any time.
@@ -27,13 +27,19 @@ bgpq4, bun runtime (or compile to js and use node; or use bun to compile to a bi
 - With Bun installed, run `bun install` to get packages.
 - Run `bun dev` to start the script.
 
-## Running w/ Cronjob
+## Compiling a Binary 
+You can also just use bun to compile to a binary. We've included a binary in the repo named `Generate`, this is built for our use case, and you'll need to recompile the binary using bun when you make changes.
+
+- `bun build ./src/main.ts --compile --outfile {binary name}`
+- Setup a cronjob to run the binary, or setup a system service. Do it however you want lol. 
+
+## Running with bun itself on cronjob
 
 - Run `which bun` to get the executable of bun.
 - Create a cronjob as root: `crontab -u root -E`
 - Start using bun in the crontab, this example is every day at 00:00: `0 0 * * * /root/.nvm/versions/node/v20.14.0/bin/bun run /root/folder/src/main.ts`
 
-Or alternatively, compile the ts to js and use node as the runtime. You can also just use bun to compile to a binary. 
+Alternatively, compile the ts to js and use node as the runtime. 
 
 ## Contributing
 
